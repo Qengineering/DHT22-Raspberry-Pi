@@ -18,12 +18,18 @@ The DHT22 has its own rather obscure 1-wire interface protocol. It is very diffe
 ![output image]( https://qengineering.eu/images/PulsTrain.png )<br/>
 The transfer is initiated by a low of 18 mS, followed by a high of 40 µS to give the sensor some time to set up the communication flow. At the same time, the GPIO pin must be configured as an input to receive the pulse train from the sensors.
 As can be seen, the length of a high determines a 0 or a 1. So the software comes down to measuring pulse lengths. It can be done through interrupt or polling techniques. Since interrupts are cumbersome and error-prone, it is better to use polling. It means continuously fetching the level of the input pin. When a change occurs, the elapsed time is measured.<br/><br/>
-Accurately measuring microseconds is also another concern. We modified Daniel's software. He uses the WiringPi delayMicroseconds() function. As shown below, not the most accurate solution. We use the clock_gettime() function, which turns out to be much better.
+Accurately measuring microseconds is also another concern. We modified [Daniel's](https://www.raspberrypi.org/forums/viewtopic.php?t=284053) software. He uses the WiringPi delayMicroseconds() function. As shown below, not the most accurate solution. We use the clock_gettime() function, which turns out to be much better.
 Because the Raspberry Pi operating system runs many tasks and threads simultaneously, it happens regularly that a transition is missed and subsequently the outcome errors. It is marked by the boolean Valid.<br/><br/>
 Below are a few histograms showing the difference between the WiringPi and the clock_gettime() function.
 First, only the application runs without other demanding processes.<br/>
-![output image]( https://qengineering.eu/images/600.webp )<br/>
+![output image]( https://qengineering.eu/images/600.webp )<br/><br/><br/>
 Next, the same situation but now with different apps.<br/>
-![output image]( https://qengineering.eu/images/600Multi.webp )<br/>
+![output image]( https://qengineering.eu/images/600Multi.webp )<br/><br/><br/>
 Finally, when the Raspberry Pi underclocked to 200MHz, something WiringPi's delayMicroseconds() brings into serious problems.<br/>
 ![output image]( https://qengineering.eu/images/200.webp )
+
+------------------
+
+## Pin numbers.
+Please find the correct WiringPi pin numbers in the diagram below.<br/>
+![output image]( https://qengineering.eu/images/WiringPi.webp )
