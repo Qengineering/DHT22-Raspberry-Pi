@@ -33,3 +33,8 @@ Finally, when the Raspberry Pi underclocked to 200MHz, something WiringPi's dela
 ## Pin numbers.
 Please find the correct WiringPi pin numbers in the diagram below.<br/>
 ![output image]( https://qengineering.eu/images/WiringPi.webp )
+
+------------
+
+[![paypal](https://qengineering.eu/images/TipJarSmall4.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CPZTM5BB3FCYL) 
+
