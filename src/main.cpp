@@ -23,7 +23,13 @@ int main( void ) {
     //<Ctrl>+<C> to stop the loop of this example
     while(1){
         MySensor->Fetch();
-        std::cout << "Temp : " <<  MySensor->Temp << " °C  Humidity : " << MySensor->Hum << " %" << std::endl;
+
+        if(MySensor->Valid) {
+            std::cout << "Temp : " <<  MySensor->Temp << " °C  Humidity : " << MySensor->Hum << " %" << std::endl;
+        } else {
+            std::cout << "Not valid data received." << std::endl;
+        }
+
         delay(1000);                    // Wait 1 seconds between readings.
         t++;
     }
