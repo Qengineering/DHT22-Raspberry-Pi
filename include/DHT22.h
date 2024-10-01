@@ -31,7 +31,7 @@ private:
     bool Fh;
     bool Init_ok;
     int  wPin;
-    int  data[5];
+    unsigned char data[6];
 
     void StartPuls(void);
 };
