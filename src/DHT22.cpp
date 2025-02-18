@@ -82,13 +82,13 @@ void TDHT22::Fetch(void)
     if((BitCnt >= 40) && (data[4] == ((data[0] + data[1] + data[2] + data[3]) & 0xFF)) ) {
         Valid= true;
         Hum  = (float)((data[0] << 8) + data[1]) / 10.0;
-        Temp = (float)((data[2] << 8) + data[3]) / 10.0;
+        Temp = (float)(((data[2] & 0x7F) << 8) + data[3]) / 10.0;
         if(data[2] & 0x80) {  // Negative Sign Bit on.
-	    Temp *= (float) -((((data[2] & 0x7F) << 8) + data[3]) / 10.0);
-	}
+            Temp *= -1;
+        }
         if(Fh) {  // Convert to Fahrenheit
-	    Temp *= 1.8; Temp += 32.0; 
-	}
+            Temp *= 1.8; Temp += 32.0; 
+        }
     }
     else {                 // Data Bad, use cached values.
         Valid= false;
